@@ -12,10 +12,12 @@ getcompleteframe <- function(directory, threshold){
 
 calculatecors <- function(files, pollutant_one, pollutant_two){
     cors <- numeric()
-    for(file in files){
-        df <- read.csv(file)
-        clean_df <- df[complete.cases(df),]
-        cors <- c(cors, cor(clean_df[pollutant_one], clean_df[pollutant_two]))
-    }
+    lapply(files, readandcleanfile, cors, pollutant_one, pollutant_two)
+}
+
+readandcleanfile <- function(file, cors, pollutant_one, pollutant_two){
+    df <- read.csv(file)
+    clean_df <- df[complete.cases(df),]
+    cors <- c(cors, cor(clean_df[pollutant_one], clean_df[pollutant_two]))
     cors
 }
