@@ -13,9 +13,9 @@ rankhospital <- function(state, outcome, num = "best") {
         head(orderedcompletes, 1)
     }else if (num == "worst"){
         tail(orderedcompletes, 1)
-    }else if (num > length(orderedcompletes)){
+    }else if (num > nrow(orderedcompletes)){
         NA
     }else{
-        orderedcompletes[num]
+        orderedcompletes[num, ]
     }
 }
